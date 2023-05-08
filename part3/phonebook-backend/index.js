@@ -4,14 +4,18 @@ const express = require('express')
 // importing morgan - middle ware
 const morgan = require('morgan')
 
+// importing cors - Cross-Origin Resource Sharing
+const cors = require('cors')
+
 // using express function to create express app
 const app = express()
 //json parser
 app.use(express.json())
-
+//using cors
+app.use(cors())
 
 //using morgan
-morgan.token('body', (request, response) => request.method === 'POST' ? JSON.stringify(request.body) : '')
+morgan.token('body', (request, response) => request.method === 'POST' ? JSON.stringify(request.body) : ' ')
 
 app.use(morgan((tokens, request, response) => [
     tokens.method(request, response),
@@ -100,7 +104,7 @@ app.post('/api/persons', (request, response) => {
         })
     }
 
-    // se eif person is already added to phonebook 
+    // see if person is already added to phonebook 
     const foundPerson = persons.find(person => person.name === request.body.name)
 
     if (foundPerson) {
