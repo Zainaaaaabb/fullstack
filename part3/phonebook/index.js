@@ -1,9 +1,27 @@
 //importing express 
 const express = require('express')
+
+// importing morgan - middle ware
+const morgan = require('morgan')
+
 // using express function to create express app
 const app = express()
 //json parser
 app.use(express.json())
+
+
+//using morgan
+morgan.token('body', (request, response) => request.method === 'POST' ? JSON.stringify(request.body) : '')
+
+app.use(morgan((tokens, request, response) => [
+    tokens.method(request, response),
+    tokens.url(request, response),
+    tokens.status(request, response),
+    tokens.res(request, response, 'content-length'), '-',
+    tokens['response-time'](request, response), 'ms',
+    tokens.body(request, response)
+].join('')))
+
 
 //import node's built in web server module 
 // same as import http from 'http'
@@ -101,6 +119,7 @@ app.post('/api/persons', (request, response) => {
 
     response.json(person)
 })
+
 
 
 const PORT = 3001
