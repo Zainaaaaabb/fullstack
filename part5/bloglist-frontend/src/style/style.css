@@ -1,19 +1,23 @@
 .error {
     border: 2px solid red;
     color: red;
-    border-radius: 10px;
+    border-radius: 5px;
     width: 50%;
-    margin: auto;
-    background-color: lightgray;
+    margin: 1em;
+    /* background-color: lightgray; */
 }
 
 .info {
     border: 2px solid green;
     color: green;
-    border-radius: 10px;
+    border-radius: 5px;
     width: 50%;
-    margin: auto;
-    background-color: lightgray;
+    margin-top: 1em;
+    /* background-color: lightgray; */
+}
+
+.blog-details {
+    margin-left: 0.5em;
 }
 
 .blog {
@@ -42,4 +46,14 @@
     border: 1px solid black;
     border-radius: 10px;
     margin-left: 1em;
+    cursor: pointer;
+}
+
+.delete-button {
+    background-color: #FF5B5B;
+    border: 1px solid black;
+    margin-left: 1em;
+    margin-top: 0.5em;
+    width: 5em;
+    cursor: pointer;
 }

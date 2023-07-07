@@ -17,12 +17,14 @@ const App = () => {
   // const [title, setTitle] = useState("")
   // const [author, setAuthor] = useState("")
   // const [url, setUrl] = useState("")
-  const [CreateBlogVisible, setCreateBlogVisible] = useState(false)
+  // const [CreateBlogVisible, setCreateBlogVisible] = useState(false)
 
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
+    blogService.getAll().then(blogs => {
+      blogs.sort((a, b) => b.likes - a.likes)
       setBlogs(blogs)
+    }
     )
   }, [])
 
@@ -146,6 +148,7 @@ const App = () => {
       newBlogFormRef.current.toggleVisibility()
       await blogService.create(blogObject)
       const blogs = await blogService.getAll()
+      blogs.sort((a, b) => b.likes - a.likes)
       setBlogs(blogs)
 
       setMessage(`a new blog ${blogObject.title} by ${blogObject.author} created`)
@@ -190,7 +193,14 @@ const App = () => {
       <div>
         <h2>Blogs</h2>
         {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} setBlogs={setBlogs} />
+          <Blog
+            key={blog.id}
+            blog={blog}
+            setBlogs={setBlogs}
+            user={user}
+            setMessage={setMessage}
+            setError={setError}
+          />
         )}
       </div>
     )
