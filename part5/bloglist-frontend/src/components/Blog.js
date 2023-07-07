@@ -9,6 +9,7 @@
 import { useState } from "react"
 import "../style/style.css"
 import blogs from "../services/blogs"
+import PropTypes from 'prop-types'
 
 const Blog = ({ blog, setBlogs, user, setMessage, setError }) => {
   const [details, setDetails] = useState(false)
@@ -105,5 +106,14 @@ const Blog = ({ blog, setBlogs, user, setMessage, setError }) => {
       }
     </div>)
 }
+
+Blog.propTypes = {
+  blog: PropTypes.object.isRequired,
+  setBlogs: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  setMessage: PropTypes.func.isRequired,
+  setError: PropTypes.func.isRequired
+}
+
 
 export default Blog
