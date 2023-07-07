@@ -14,9 +14,9 @@ const App = () => {
   const [error, setError] = useState(false)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [title, setTitle] = useState("")
-  const [author, setAuthor] = useState("")
-  const [url, setUrl] = useState("")
+  // const [title, setTitle] = useState("")
+  // const [author, setAuthor] = useState("")
+  // const [url, setUrl] = useState("")
   const [CreateBlogVisible, setCreateBlogVisible] = useState(false)
 
 
@@ -105,24 +105,50 @@ const App = () => {
     }
   }
 
-  const handleNewBlog = async (event) => {
-    event.preventDefault()
+  // const handleNewBlog = async (event) => {
+  //   event.preventDefault()
 
-    const blog = {
-      title,
-      author,
-      url,
-    }
+  //   const blog = {
+  //     title,
+  //     author,
+  //     url,
+  //   }
+
+  //   try {
+
+  //     await blogService.create(blog)
+  //     const blogs = await blogService.getAll()
+  //     setBlogs(blogs)
+  //     setMessage(`a new blog ${title} by ${author} created`)
+  //     setAuthor("")
+  //     setTitle("")
+  //     setUrl("")
+  //     setTimeout(() => {
+  //       setMessage(null)
+  //     }, 5000)
+  //   }
+
+  //   catch (exception) {
+  //     setMessage('Failed to create blog, please try again')
+  //     setError(true)
+  //     setTimeout(() => {
+  //       setMessage(null)
+  //       setError(false)
+  //     }, 5000)
+  //   }
+  // }
+
+  const addBlog = async (blogObject) => {
+
+    // blogObject.preventDefault()
 
     try {
-
-      await blogService.create(blog)
+      newBlogFormRef.current.toggleVisibility()
+      await blogService.create(blogObject)
       const blogs = await blogService.getAll()
       setBlogs(blogs)
-      setMessage(`a new blog ${title} by ${author} created`)
-      setAuthor("")
-      setTitle("")
-      setUrl("")
+
+      setMessage(`a new blog ${blogObject.title} by ${blogObject.author} created`)
       setTimeout(() => {
         setMessage(null)
       }, 5000)
@@ -139,18 +165,19 @@ const App = () => {
   }
 
   const newBlogFormRef = useRef()
+
   const newBlogForm = () => {
     return (
       <div>
         <Togglable buttonLabel="new note" ref={newBlogFormRef}>
           <NewBlogForm
-            title={title}
-            author={author}
-            url={url}
-            setTitle={setTitle}
-            setAuthor={setAuthor}
-            setUrl={setUrl}
-            handleNewBlog={handleNewBlog}
+            // title={title}
+            // author={author}
+            // url={url}
+            // setTitle={setTitle}
+            // setAuthor={setAuthor}
+            // setUrl={setUrl}
+            handleNewBlog={addBlog}
           />
         </Togglable>
       </div>
@@ -158,12 +185,12 @@ const App = () => {
   }
 
   const renderForm = () => {
-    newBlogFormRef.current.toggleVisibility()
+    // newBlogFormRef.current.toggleVisibility()
     return (
       <div>
         <h2>Blogs</h2>
         {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} />
+          <Blog key={blog.id} blog={blog} setBlogs={setBlogs} />
         )}
       </div>
     )
@@ -184,7 +211,6 @@ const App = () => {
         <p>{user.name} logged in</p>
         <button onClick={handleLogout}>Log out</button>
         {newBlogForm()}
-
         {renderForm()}
       </div>
       }
