@@ -1,24 +1,47 @@
 import { useState } from 'react'
 // import PropTypes from 'prop-types'
+import blogService from '../services/blogs'
 
-const NewBlogForm = ({ handleNewBlog }) => {
+// const NewBlogForm = ({ handleNewBlog }) => {
+export const NewBlogForm = ({ setMessage, setBlogs, setError, blogFormRef, testSubmit }) => {
 
     const [title, setTitle] = useState("")
     const [author, setAuthor] = useState("")
     const [url, setUrl] = useState("")
 
-    const addBlog = (event) => {
+    const addBlog = async (event) => {
         event.preventDefault()
-        handleNewBlog({
+        const blog = {
             title: title,
             author: author,
             url: url
-        })
+        }
 
-    
-        setTitle('')
-        setAuthor('')
-        setUrl('')
+
+        // setTitle('')
+        // setAuthor('')
+        // setUrl('')
+
+        try {
+            await blogService.create(blog)
+            blogFormRef.current.toggleVisibility()
+            const blogs = await blogService.getAll()
+            setBlogs(blogs)
+            setMessage(`a new blog ${title} by ${author} created`)
+            setAuthor('')
+            setTitle('')
+            setUrl('')
+            setTimeout(() => {
+                setMessage(null)
+            }, 5000)
+        } catch (exception) {
+            setMessage('Failed to create blog, please try again')
+            setError(true)
+            setTimeout(() => {
+                setMessage(null)
+                setError(false)
+            }, 5000)
+        }
     }
 
     return (
@@ -34,7 +57,9 @@ const NewBlogForm = ({ handleNewBlog }) => {
                 <div>
                     <input placeholder="URL" type="text" value={url} name="url" onChange={event => setUrl(event.target.value)} />
                 </div>
-                <button type="submit">Create New Blog</button>
+                <button onClick={testSubmit} type="submit">
+                    Create New Blog
+                </button>
             </form>
         </div>
     )

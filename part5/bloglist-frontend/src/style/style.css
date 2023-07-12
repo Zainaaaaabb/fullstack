@@ -25,11 +25,13 @@
     margin-bottom: 1em;
 }
 
-.blog-title {
+.blog-title-author {
     font-size: large;
     font-weight: 600;
     margin-top: 0.5em;
+    margin-left: 0.5em;
 }
+
 
 .toggle-details {
     margin-top: 0.5em;
