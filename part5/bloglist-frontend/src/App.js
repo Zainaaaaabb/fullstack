@@ -21,9 +21,9 @@ const App = () => {
   // const [CreateBlogVisible, setCreateBlogVisible] = useState(false)
 
 
-  // const testSubmit = () => {
-  //   return
-  // }
+  const testSubmit = () => {
+    return
+  }
 
   useEffect(() => {
     // blogService.getAll().then(blogs => {
@@ -55,7 +55,7 @@ const App = () => {
   )
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
@@ -182,22 +182,8 @@ const App = () => {
   const newBlogForm = () => {
     return (
       <div>
-        <Togglable buttonLabel="new note" ref={newBlogFormRef}>
-          {/* <NewBlogForm
-            // title={title}
-            // author={author}
-            // url={url}
-            // setTitle={setTitle}
-            // setAuthor={setAuthor}
-            // setUrl={setUrl}
-            handleNewBlog={addBlog}
-          /> */}
-
-          <NewBlogForm
-            setMessage={setMessage}
-            setBlogs={setBlogs}
-            setError={setError}
-            blogFormRef={newBlogFormRef} />
+        <Togglable className='togglable-button' buttonLabel="new blog" ref={newBlogFormRef}>
+          <NewBlogForm setMessage={setMessage} setBlogs={setBlogs} setError={setError} blogFormRef={newBlogFormRef} testSubmit={testSubmit} />
         </Togglable>
       </div >
     )
@@ -225,7 +211,8 @@ const App = () => {
 
   return (
     <div>
-      <h1>Blog List</h1>
+      {/* <h1>Blog List</h1> */}
+      <h1 id='app-header'>Blogs</h1>
       <div>
         {
           message !== null && <Notification message={message} error={error} />
@@ -235,8 +222,11 @@ const App = () => {
 
       {!user && loginForm()}
       {user && <div>
-        <p>{user.name} logged in</p>
-        <button onClick={handleLogout}>Log out</button>
+        {/* <p>{user.name} logged in</p> */}
+        {/* <button onClick={handleLogout}>Log out</button>
+         */}
+        <h4 className='loggedin-user'>{user.username} logged in</h4>
+        <button className='logout-button' onClick={handleLogout}>Log out</button>
         {newBlogForm()}
         {renderForm()}
       </div>

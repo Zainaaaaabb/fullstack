@@ -1,3 +1,7 @@
+#app-header {
+    color: #5B7FFF;
+}
+
 .error {
     border: 2px solid red;
     color: red;
@@ -14,6 +18,36 @@
     width: 50%;
     margin-top: 1em;
     /* background-color: lightgray; */
+}
+
+.loggedin-user {
+    color: #5B7FFF;
+    font-size: large;
+}
+
+.login-button {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    background-color: #5bff7fba;
+    border: 1px solid black;
+    width: 8em;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 1em;
+}
+
+.logout-button {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    background-color: #FF5B5B;
+    border: 1px solid black;
+    width: 8em;
+    cursor: pointer;
+    margin-left: 1em;
+}
+
+.logout-button:hover {
+    scale: 1.05;
 }
 
 .blog-details {
@@ -58,4 +92,37 @@
     margin-top: 0.5em;
     width: 5em;
     cursor: pointer;
+}
+
+.createblog-button {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    background-color: #d35bff;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 8em;
+    cursor: pointer;
+    margin-left: 1em;
+}
+
+.cancel-button {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    background-color: #FF5B5B;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 8em;
+    cursor: pointer;
+    margin-left: 1em;
+}
+
+.create-button {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    background-color: #5bff7fba;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 8em;
+    cursor: pointer;
+    margin-left: 1em;
 }

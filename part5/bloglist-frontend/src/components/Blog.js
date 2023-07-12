@@ -6,13 +6,23 @@
 
 // export default Blog
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import "../style/style.css"
 import blogs from "../services/blogs"
 import PropTypes from 'prop-types'
 
 const Blog = ({ blog, setBlogs, user, setMessage, setError, updateBlog }) => {
   const [details, setDetails] = useState(false)
+
+
+  const [showDelete, setShowDelete] = useState(false)
+
+  useEffect(() => {
+    if (user && blog.user.username === user.username) {
+      setShowDelete(true)
+    }
+  })
+
 
   const toggleDetails = () => {
     setDetails(!details)
@@ -105,8 +115,18 @@ const Blog = ({ blog, setBlogs, user, setMessage, setError, updateBlog }) => {
             <div id='likes'>{blog.likes}<button className='like-button' onClick={() => updateBlog(blog)}>like</button><br />
             </div>
             {blog.user.username}<br />
-            <button className="delete-button" onClick={deleteBlog}>delete</button>
-            <br />
+            {/* <button className="delete-button" onClick={deleteBlog}>delete</button>
+            <br /> */}
+            {
+              showDelete
+                ?
+                <div>
+                  <button className='delete-button' onClick={deleteBlog}>delete</button>
+                  <br />
+                </div>
+                :
+                null
+            }
             <button className="toggle-details" onClick={toggleDetails}>hide</button>
           </div>
           :
